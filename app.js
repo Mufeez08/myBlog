@@ -68,16 +68,15 @@ app.post("/compose", function(req, res){
 });
 
 app.get("/posts/:postName", function(req, res){
-  const requestedTitle = _.lowerCase(req.params.postName);
-
+  const linktitle = req.params.postName;
+  
   // Post.findOne with the requestedTitle and take response and render with post
-  Post.findOne({title:requestedTitle}).then((post)=>{
-    const storedTitle = _.lowerCase(post.title);
+  Post.findOne({title:linktitle}).then((post)=>{
     res.render("post", {
-        title: storedTitle,
+        title: post.title,
         content: post.content
       });
-  })
+  });
   // posts.forEach(function(post){
   //   const storedTitle = _.lowerCase(post.title); // title of document
 
